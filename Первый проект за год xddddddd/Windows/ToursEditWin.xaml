@@ -1,0 +1,36 @@
+﻿<Window x:Class="Первый_проект_за_год_xddddddd.Windows.ToursEditWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Первый_проект_за_год_xddddddd.Windows"
+        mc:Ignorable="d"
+        Title="ToursEditWin" Height="450" Width="400" Icon="imgs/Лого.jpg" Style="{StaticResource StyleWin}">
+    <Grid>
+        <Viewbox Margin="10">
+            <StackPanel Width="300" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label>Название</Label>
+                <TextBox Height="30" Text="{Binding Name}"></TextBox>
+                <Label>Описание</Label>
+                <TextBox Height="30" Text="{Binding Description}"></TextBox>
+                <Label>Цена</Label>
+                <TextBox Height="30" Text="{Binding Price}"></TextBox>
+                <Label>Картинка</Label>
+                <ComboBox Name="cb_Images" SelectedValuePath="ImagePreview" SelectedValue="{Binding ImagePreview}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding ImagePreview}" Width="40"/>
+                                <Label Content="{Binding ImagePath}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Label>Актуальность</Label>
+                <ComboBox DisplayMemberPath="Name" SelectedValue="{Binding Id}" SelectedValuePath="Id" Name="cb_Countries"></ComboBox>
+
+                <Button Content="Сохранить" Click="bt_SaveClick" Margin="0, 10"/>
+            </StackPanel>
+        </Viewbox>
+    </Grid>
+</Window>

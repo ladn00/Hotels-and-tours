@@ -1,0 +1,82 @@
+﻿<Page x:Class="Первый_проект_за_год_xddddddd.Pages.ToursPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Первый_проект_за_год_xddddddd.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ToursPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="129*"/>
+            <RowDefinition Height="26*"/>
+        </Grid.RowDefinitions>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <DockPanel Margin="3" Width="300">
+                <Label Content="Введите текст для поиска:"/>
+                <TextBox Width="130" HorizontalAlignment="Right" Name="tbSearchText" TextChanged="searchTextChanged"></TextBox>
+            </DockPanel>
+            <DockPanel Margin="3" Width="300">
+                <Label Content="Выберите тип:"/>
+                <ComboBox Margin="5"  x:Name="CBType" Width="150" Height="30" HorizontalAlignment="Right" SelectionChanged="CBTypeSelectionChanged"></ComboBox>
+            </DockPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox/>
+                <Label Content="только актуальные туры"/>
+            </StackPanel>
+            <DockPanel>
+                <Button Content="Вывод в Word" Width="150" Height="20" Click="ToursWord_Click" Style="{StaticResource btMain}"/>
+                <Button Content="Вывод по CB" Width="150" Height="20" Click="ToursExcel_Click" Style="{StaticResource btMain}"/>
+                <Button Content="Вывод по типам" Width="150" Height="20" Click="ToursByTypesExcel_Click" Style="{StaticResource btMain}"/>
+                <Button Content="Добавить" Width="150" Height="20" Click="Hotel_Add" Style="{StaticResource btMain}"/>
+            </DockPanel>
+            
+
+        </StackPanel>
+        <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="lw1" Background="#bae3e8" Grid.Row="1">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel HorizontalAlignment="Center"></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="5"  BorderThickness="2" BorderBrush="Black">
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Height="240" Width="200" Background="#fac716">
+                            <TextBlock  TextAlignment="Center" TextWrapping="Wrap" Text="{Binding Name}" Width="190"></TextBlock>
+                            <Image Margin="0,20,0,0" Width="130" Source="{Binding ImagePath}" HorizontalAlignment="Center">
+                            </Image>
+                            <TextBlock Text="{Binding Price, StringFormat= {} {0:f2} руб.}" FontSize="16" Margin="5" HorizontalAlignment="Center"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Actualnost}" Foreground="{Binding ActualnostColor}" HorizontalAlignment="Left" Width="75"></TextBlock>
+                                <TextBlock HorizontalAlignment="Right">
+                                    <Run>
+                                    Билетов: 
+                                </Run>
+                                <Run Text="{Binding TicketCount, StringFormat= {} {0} шт.}">
+                                </Run></TextBlock>
+                            </StackPanel>
+                            <DockPanel Margin="0,10">
+                                <Button Click="Hotel_Edit" Width="100" HorizontalAlignment="Left" Style="{DynamicResource btEdit}" Margin="5, 0">Редактировать</Button>
+                                <Button Click="Hotel_Delete" Width="55" DockPanel.Dock="Right" Style="{StaticResource btDelete}">Удалить</Button>
+                            </DockPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+            <Button Click="GoToFirstPage" Height="40" Width="40" Content="&lt;&lt;"></Button>
+            <Button Click="GoToPreviousPage" Height="40" Width="20" Content="&lt;"></Button>
+            <TextBox Name="TxtCurrentPage" Height="30" Width="50" Margin="5"></TextBox>
+            <Label Name="LblTotalPages" Height="30">of N</Label>
+            <Button Click="GoToNextPage" Height="40" Width="20" Content="&gt;"></Button>
+            <Button Click="GoToLastPage" Height="40" Width="40" Content="&gt;&gt;"></Button>
+            <Label Name="LblInfo" Margin="10" Height="30">of N</Label>
+
+        </StackPanel>
+    </Grid>
+</Page>
